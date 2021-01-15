@@ -20,12 +20,13 @@ namespace EcommerceBlueModas.Repositories
 
         public void CadastrarCliente(Cliente cliente)
         {
-            throw new NotImplementedException();
+            _context.Cliente.Add(cliente);
+            _context.SaveChanges();
         }
 
-        public Cliente GetById(string id)
+        public Cliente GetById(int id)
         {
-            throw new NotImplementedException();
+            return _context.Cliente.FirstOrDefault(c => c.id == id);
         }
     }
 }

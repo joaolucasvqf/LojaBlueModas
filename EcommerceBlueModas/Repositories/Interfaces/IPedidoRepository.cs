@@ -10,9 +10,9 @@ namespace EcommerceBlueModas.Repositories.Interfaces
     {
         IEnumerable<Pedido> Pedidos { get; }
         int NovoPedido(Pedido pedido);
-        Pedido GetById(string id);
-        IEnumerable<Pedido> GetPedidosByCliente(string idCliente);
+        Pedido GetById(int id);
+        IEnumerable<Pedido> GetPedidosByCliente(int idCliente);
         void AtualizarPedido(Pedido pedido);
-        void CancelarPedido(string idPedido);
+        void CancelarPedido(int idPedido);
     }
 }

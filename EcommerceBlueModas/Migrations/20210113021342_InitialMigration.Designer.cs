@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EcommerceBlueModas.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210109004704_MigracaoInicial")]
-    partial class MigracaoInicial
+    [Migration("20210113021342_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,23 +20,6 @@ namespace EcommerceBlueModas.Migrations
                 .UseIdentityByDefaultColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.1");
-
-            modelBuilder.Entity("EcommerceBlueModas.Models.Cesta", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
-
-                    b.Property<int?>("clienteid")
-                        .HasColumnType("integer");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("clienteid");
-
-                    b.ToTable("Cesta");
-                });
 
             modelBuilder.Entity("EcommerceBlueModas.Models.Cliente", b =>
                 {
@@ -83,9 +66,6 @@ namespace EcommerceBlueModas.Migrations
                         .HasColumnType("integer")
                         .UseIdentityByDefaultColumn();
 
-                    b.Property<int?>("Cestaid")
-                        .HasColumnType("integer");
-
                     b.Property<int?>("Pedidoid")
                         .HasColumnType("integer");
 
@@ -98,6 +78,9 @@ namespace EcommerceBlueModas.Migrations
                     b.Property<string>("descricao")
                         .HasColumnType("text");
 
+                    b.Property<byte[]>("imagem")
+                        .HasColumnType("bytea");
+
                     b.Property<int>("quantidade")
                         .HasColumnType("integer");
 
@@ -109,20 +92,9 @@ namespace EcommerceBlueModas.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("Cestaid");
-
                     b.HasIndex("Pedidoid");
 
                     b.ToTable("Produto");
-                });
-
-            modelBuilder.Entity("EcommerceBlueModas.Models.Cesta", b =>
-                {
-                    b.HasOne("EcommerceBlueModas.Models.Cliente", "cliente")
-                        .WithMany()
-                        .HasForeignKey("clienteid");
-
-                    b.Navigation("cliente");
                 });
 
             modelBuilder.Entity("EcommerceBlueModas.Models.Pedido", b =>
@@ -136,18 +108,9 @@ namespace EcommerceBlueModas.Migrations
 
             modelBuilder.Entity("EcommerceBlueModas.Models.Produto", b =>
                 {
-                    b.HasOne("EcommerceBlueModas.Models.Cesta", null)
-                        .WithMany("produtos")
-                        .HasForeignKey("Cestaid");
-
                     b.HasOne("EcommerceBlueModas.Models.Pedido", null)
                         .WithMany("produtos")
                         .HasForeignKey("Pedidoid");
-                });
-
-            modelBuilder.Entity("EcommerceBlueModas.Models.Cesta", b =>
-                {
-                    b.Navigation("produtos");
                 });
 
             modelBuilder.Entity("EcommerceBlueModas.Models.Pedido", b =>

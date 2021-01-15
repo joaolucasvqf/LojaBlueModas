@@ -20,20 +20,21 @@ namespace EcommerceBlueModas.Repositories
 
         public void AtualizarPedido(Pedido pedido)
         {
-            throw new NotImplementedException();
+            _context.Pedido.Update(pedido);
+            _context.SaveChanges();
         }
 
-        public void CancelarPedido(string idPedido)
+        public void CancelarPedido(int idPedido)
         {
             throw new NotImplementedException();
         }
 
-        public Pedido GetById(string id)
+        public Pedido GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Pedido> GetPedidosByCliente(string idCliente)
+        public IEnumerable<Pedido> GetPedidosByCliente(int idCliente)
         {
             throw new NotImplementedException();
         }

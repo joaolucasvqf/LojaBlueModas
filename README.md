@@ -36,5 +36,7 @@ Inserir o comando Update-Database para a criação do banco de dados.
 ### Facilidades encontradas:
 
 ### Horas gastas durante o desenvolvimento:
-- Total: 
+- Total: 3h
     - 1h - Configuração do ambiente.
+    - 2h - Mapeamento das entidades e criação do banco de dados.
+

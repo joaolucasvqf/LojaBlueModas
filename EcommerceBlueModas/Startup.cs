@@ -28,7 +28,9 @@ namespace EcommerceBlueModas
             services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(Configuration.GetSection("ConnectionString").Value));
 
-            services.AddTransient<ICestaRepository, CestaRepository>();
+            services.AddTransient<IClienteRepository, ClienteRepository>();
+            services.AddTransient<IPedidoRepository, PedidoRepository>();
+            services.AddTransient<IProdutoRepository, ProdutoRepository>();
 
             services.Configure<AppSettingsReader>(Configuration.GetSection("AppSettings"));
 

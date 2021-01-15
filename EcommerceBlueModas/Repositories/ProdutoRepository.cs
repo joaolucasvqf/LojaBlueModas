@@ -16,11 +16,11 @@ namespace EcommerceBlueModas.Repositories
             _context = context;
         }
 
-        public IEnumerable<Produto> produtos => throw new NotImplementedException();
+        public IEnumerable<Produto> produtos => _context.Produto.ToList();
 
-        public Produto GetById(string id)
+        public Produto GetById(int id)
         {
-            throw new NotImplementedException();
+            return  _context.Produto.FirstOrDefault(p => p.id == id);
         }
     }
 }

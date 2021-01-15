@@ -10,6 +10,6 @@ namespace EcommerceBlueModas.Repositories.Interfaces
     {
         IEnumerable<Cliente> Clientes { get; }
         void CadastrarCliente(Cliente cliente);
-        Cliente GetById(string id);
+        Cliente GetById(int id);
     }
 }

@@ -9,6 +9,6 @@ namespace EcommerceBlueModas.Repositories.Interfaces
     public interface IProdutoRepository
     {
         IEnumerable<Produto> produtos { get; }
-        Produto GetById(string id);
+        Produto GetById(int id);
     }
 }

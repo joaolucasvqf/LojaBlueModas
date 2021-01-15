@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace EcommerceBlueModas.Migrations
 {
-    public partial class MigracaoInicial : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,25 +21,6 @@ namespace EcommerceBlueModas.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cliente", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Cesta",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    clienteid = table.Column<int>(type: "integer", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cesta", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_Cesta_Cliente_clienteid",
-                        column: x => x.clienteid,
-                        principalTable: "Cliente",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -72,18 +54,12 @@ namespace EcommerceBlueModas.Migrations
                     tamanho = table.Column<int>(type: "integer", nullable: false),
                     cor = table.Column<string>(type: "text", nullable: true),
                     quantidade = table.Column<int>(type: "integer", nullable: false),
-                    Cestaid = table.Column<int>(type: "integer", nullable: true),
+                    imagem = table.Column<byte[]>(type: "bytea", nullable: true),
                     Pedidoid = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Produto", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_Produto_Cesta_Cestaid",
-                        column: x => x.Cestaid,
-                        principalTable: "Cesta",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Produto_Pedido_Pedidoid",
                         column: x => x.Pedidoid,
@@ -93,19 +69,9 @@ namespace EcommerceBlueModas.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cesta_clienteid",
-                table: "Cesta",
-                column: "clienteid");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Pedido_clienteid",
                 table: "Pedido",
                 column: "clienteid");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Produto_Cestaid",
-                table: "Produto",
-                column: "Cestaid");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Produto_Pedidoid",
@@ -117,9 +83,6 @@ namespace EcommerceBlueModas.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Produto");
-
-            migrationBuilder.DropTable(
-                name: "Cesta");
 
             migrationBuilder.DropTable(
                 name: "Pedido");
