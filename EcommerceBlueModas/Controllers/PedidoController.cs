@@ -21,14 +21,18 @@ namespace EcommerceBlueModas.Controllers
             _config = config;
             _pedidoRepository = pedidoRepository;
         }
-        /// <summary>
-        /// Retorna uma lista com todos os pedidos. 
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet()]
-        public async Task<IActionResult> ListarPedidos()
+        [HttpPost()]
+        public async Task<IActionResult> NovoPedido(Pedido pedido)
         {
-            return Ok();
+            try
+            {
+                _pedidoRepository.NovoPedido(pedido);
+                return Ok(pedido);
+            }
+            catch (Exception e)
+            {
+                return UnprocessableEntity(e.Message);
+            }
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> ObterPediById(int id)
